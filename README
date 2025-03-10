@@ -1,0 +1,76 @@
+# Todo List App
+
+A simple web-based todo list application with persistent storage, featuring three main screens: Home, Saved List, and Edit page.
+
+![Todo List App Screenshot](https://via.placeholder.com/800x600.png?text=Todo+List+Screenshot)
+
+## Features
+
+- **Home Screen**
+  - Add new tasks
+  - Edit existing tasks
+  - Delete tasks
+  - Navigate to Saved List
+- **Saved List Screen**
+  - View all saved tasks
+  - Delete tasks
+  - Return to Home Screen
+- **Edit Screen**
+  - Modify task text
+  - Save changes or cancel edits
+- **Data Persistence**
+  - Automatically saves tasks to browser's local storage
+  - Maintains state between sessions
+- **Responsive Design**
+  - Works on both desktop and mobile devices
+
+## Installation
+
+1. Clone or download the repository
+2. Ensure you have three files in the same directory:
+   - `index.html`
+   - `style.css`
+   - `app.js`
+3. No additional dependencies required
+
+## Usage
+
+1. Open in VS Code:
+   - Install the "Live Server" extension
+   - Right-click `index.html` and select "Open with Live Server"
+   - The app will open in your default browser
+
+2. Using the App:
+   - **Home Screen** (default view)
+     - Add tasks using the input field and "Add Task" button
+     - Edit or delete tasks using respective buttons
+     - Click "View Saved List" to see all saved tasks
+   - **Saved List Screen**
+     - View read-only list of all tasks
+     - Delete tasks or return to Home Screen
+   - **Edit Screen**
+     - Modify task text in the input field
+     - Save changes or cancel to return to Home Screen
+
+## Technical Details
+
+- **Technologies Used**
+  - HTML5
+  - CSS3
+  - JavaScript (ES6)
+  - Browser Local Storage
+
+- **Data Storage**
+  - Tasks are stored in `localStorage`
+  - Persists between browser sessions
+  - Data remains on user's device (no cloud storage)
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Acknowledgments
+
+- Live Server extension for VS Code
+- Modern browser APIs for local storage
+- W3Schools for documentation reference
