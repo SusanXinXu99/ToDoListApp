@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Home Screen -->
+    <div id="homeScreen" class="screen">
+        <h1>Todo List</h1>
+        <input type="text" id="taskInput" placeholder="New task...">
+        <button onclick="addTask()">Add Task</button>
+        <ul id="taskList"></ul>
+        <div class="nav-buttons">
+            <button onclick="showScreen('savedScreen')">View Saved List</button>
+        </div>
+    </div>
+
+    <!-- Saved List Screen -->
+    <div id="savedScreen" class="screen hidden">
+        <h1>Saved Tasks</h1>
+        <ul id="savedList"></ul>
+        <button onclick="showScreen('homeScreen')">Back to Home</button>
+    </div>
+
+    <!-- Edit Page -->
+    <div id="editScreen" class="screen hidden">
+        <h1>Edit Task</h1>
+        <input type="text" id="editInput">
+        <button onclick="saveEdit()">Save Changes</button>
+        <button onclick="showScreen('homeScreen')">Cancel</button>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
