@@ -5,6 +5,29 @@ tasks = tasks.map(task => ({
 }));
 let currentEditIndex = null;
 
+// Dark Mode Logic
+function toggleDarkMode() {
+    const body = document.body;
+    const toggleButton = document.getElementById('darkModeToggle');
+    
+    body.classList.toggle('dark-mode');
+    if (body.classList.contains('dark-mode')) {
+        toggleButton.textContent = '☀️'; // Sun icon for light mode
+        localStorage.setItem('darkMode', 'enabled');
+    } else {
+        toggleButton.textContent = '🌙'; // Moon icon for dark mode
+        localStorage.setItem('darkMode', 'disabled');
+    }
+}
+
+// Check for saved dark mode preference
+if (localStorage.getItem('darkMode') === 'enabled') {
+    document.body.classList.add('dark-mode');
+    document.getElementById('darkModeToggle').textContent = '☀️'; // Sun icon for light mode
+} else {
+    document.getElementById('darkModeToggle').textContent = '🌙'; // Moon icon for dark mode
+}
+
 function showScreen(screenId) {
     document.querySelectorAll('.screen').forEach(screen => {
         screen.classList.add('hidden');
