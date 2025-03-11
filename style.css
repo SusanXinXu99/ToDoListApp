@@ -5,6 +5,46 @@
     box-sizing: border-box;
 }
 
+/* Add Date Picker Styles */
+input[type="date"] {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    background-color: white;
+    max-width: 140px;
+}
+
+/* Due Date Badge */
+.due-date {
+    font-size: 12px;
+    color: #666;
+    background-color: #f0f0f0;
+    padding: 4px 8px;
+    border-radius: 12px;
+    margin-left: 10px;
+}
+
+body.dark-mode .due-date {
+    background-color: #333;
+    color: #ccc;
+}
+
+/* Adjust Input Container */
+.input-container {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.input-container > * {
+    flex: 1 1 auto;
+}
+
+/* Existing styles remain the same below... */
+/* [Keep all previous CSS styles from earlier versions] */
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f5f5f5;
