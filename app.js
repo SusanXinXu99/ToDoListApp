@@ -1,4 +1,8 @@
 let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+tasks = tasks.map(task => ({ 
+    text: task.text, 
+    completed: task.completed || false
+}));
 let currentEditIndex = null;
 
 function showScreen(screenId) {
@@ -39,17 +43,24 @@ function saveEdit() {
     }
 }
 
+function toggleCompletion(index) {
+    tasks[index].completed = !tasks[index].completed;
+    saveTasks();
+    renderTasks();
+}
+
 function saveTasks() {
     localStorage.setItem('tasks', JSON.stringify(tasks));
 }
 
-
 function renderTasks() {
-    // Render home screen tasks
     const taskList = document.getElementById('taskList');
     taskList.innerHTML = tasks.map((task, index) => `
-        <li>
-            ${task.text}
+        <li class="${task.completed ? 'completed' : ''}">
+            <input type="checkbox" 
+                   onchange="toggleCompletion(${index})" 
+                   ${task.completed ? 'checked' : ''}>
+            <span class="task-text">${task.text}</span>
             <div>
                 <button onclick="editTask(${index})">Edit</button>
                 <button onclick="deleteTask(${index})">Delete</button>
@@ -57,7 +68,6 @@ function renderTasks() {
         </li>
     `).join('');
 
-    // Render saved tasks (same as home in this example)
     const savedList = document.getElementById('savedList');
     savedList.innerHTML = tasks.map((task, index) => `
         <li>
@@ -69,18 +79,17 @@ function renderTasks() {
     `).join('');
 }
 
-
-// ===== Splash Screen Logic =====
+// Splash Screen Logic
 window.addEventListener('load', () => {
     setTimeout(() => {
         document.getElementById('splashScreen').style.opacity = '0';
         setTimeout(() => {
             document.getElementById('splashScreen').remove();
             document.querySelector('.container').classList.remove('hidden');
-        }, 500); // Matches CSS transition time
-    }, 2500); // Total splash time = 2.5s (2s visible + 0.5s fade)
+        }, 500);
+    }, 2500);
 });
 
-// ===== Initialization =====
+// Initial render and screen setup
 renderTasks();
 showScreen('homeScreen');
