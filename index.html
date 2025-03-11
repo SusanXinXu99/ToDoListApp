@@ -7,30 +7,32 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Home Screen -->
-    <div id="homeScreen" class="screen">
-        <h1>Todo List</h1>
-        <input type="text" id="taskInput" placeholder="New task...">
-        <button onclick="addTask()">Add Task</button>
-        <ul id="taskList"></ul>
-        <div class="nav-buttons">
-            <button onclick="showScreen('savedScreen')">View Saved List</button>
+    <div class="container">
+        <!-- Home Screen -->
+        <div id="homeScreen" class="screen">
+            <h1>Todo List</h1>
+            <input type="text" id="taskInput" placeholder="New task...">
+            <button onclick="addTask()">Add Task</button>
+            <ul id="taskList"></ul>
+            <div class="nav-buttons">
+                <button onclick="showScreen('savedScreen')">View Saved List</button>
+            </div>
         </div>
-    </div>
 
-    <!-- Saved List Screen -->
-    <div id="savedScreen" class="screen hidden">
-        <h1>Saved Tasks</h1>
-        <ul id="savedList"></ul>
-        <button onclick="showScreen('homeScreen')">Back to Home</button>
-    </div>
+        <!-- Saved List Screen -->
+        <div id="savedScreen" class="screen hidden">
+            <h1>Saved Tasks</h1>
+            <ul id="savedList"></ul>
+            <button onclick="showScreen('homeScreen')">Back to Home</button>
+        </div>
 
-    <!-- Edit Page -->
-    <div id="editScreen" class="screen hidden">
-        <h1>Edit Task</h1>
-        <input type="text" id="editInput">
-        <button onclick="saveEdit()">Save Changes</button>
-        <button onclick="showScreen('homeScreen')">Cancel</button>
+        <!-- Edit Page -->
+        <div id="editScreen" class="screen hidden">
+            <h1>Edit Task</h1>
+            <input type="text" id="editInput">
+            <button onclick="saveEdit()">Save Changes</button>
+            <button onclick="showScreen('homeScreen')">Cancel</button>
+        </div>
     </div>
 
     <script src="app.js"></script>
