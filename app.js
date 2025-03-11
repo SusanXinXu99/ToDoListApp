@@ -1,109 +1,86 @@
-/* General Reset */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+let currentEditIndex = null;
+
+function showScreen(screenId) {
+    document.querySelectorAll('.screen').forEach(screen => {
+        screen.classList.add('hidden');
+    });
+    document.getElementById(screenId).classList.remove('hidden');
 }
 
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f5f5f5;
-    color: #333;
-    line-height: 1.6;
-    padding: 20px;
-}
-
-/* Mobile-First Design */
-.container {
-    max-width: 100%;
-    margin: 0 auto;
-    padding: 10px;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-h1 {
-    font-size: 24px;
-    color: #4CAF50;
-    margin-bottom: 20px;
-    text-align: center;
-}
-
-input[type="text"] {
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 16px;
-}
-
-button {
-    width: 100%;
-    padding: 12px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    margin-bottom: 10px;
-}
-
-button:hover {
-    background-color: #45a049;
-}
-
-ul {
-    list-style-type: none;
-    margin-top: 20px;
-}
-
-li {
-    background-color: #f9f9f9;
-    padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    margin-bottom: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-li button {
-    width: auto;
-    padding: 8px 12px;
-    margin-left: 10px;
-    font-size: 14px;
-}
-
-.nav-buttons {
-    margin-top: 20px;
-}
-
-.hidden {
-    display: none;
-}
-
-/* Responsive Design for Larger Screens */
-@media (min-width: 600px) {
-    .container {
-        max-width: 500px;
-        margin: 20px auto;
-        padding: 20px;
-    }
-
-    h1 {
-        font-size: 28px;
-    }
-
-    input[type="text"] {
-        width: calc(100% - 120px);
-    }
-
-    button {
-        width: auto;
-        padding: 12px 20px;
+function addTask() {
+    const input = document.getElementById('taskInput');
+    if (input.value.trim()) {
+        tasks.push({ text: input.value.trim(), completed: false });
+        input.value = '';
+        saveTasks();
+        renderTasks();
     }
 }
+
+function deleteTask(index) {
+    tasks.splice(index, 1);
+    saveTasks();
+    renderTasks();
+}
+
+function editTask(index) {
+    currentEditIndex = index;
+    document.getElementById('editInput').value = tasks[index].text;
+    showScreen('editScreen');
+}
+
+function saveEdit() {
+    if (currentEditIndex !== null) {
+        tasks[currentEditIndex].text = document.getElementById('editInput').value;
+        saveTasks();
+        renderTasks();
+        showScreen('homeScreen');
+    }
+}
+
+function saveTasks() {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+}
+
+
+function renderTasks() {
+    // Render home screen tasks
+    const taskList = document.getElementById('taskList');
+    taskList.innerHTML = tasks.map((task, index) => `
+        <li>
+            ${task.text}
+            <div>
+                <button onclick="editTask(${index})">Edit</button>
+                <button onclick="deleteTask(${index})">Delete</button>
+            </div>
+        </li>
+    `).join('');
+
+    // Render saved tasks (same as home in this example)
+    const savedList = document.getElementById('savedList');
+    savedList.innerHTML = tasks.map((task, index) => `
+        <li>
+            ${task.text}
+            <div>
+                <button onclick="deleteTask(${index})">Delete</button>
+            </div>
+        </li>
+    `).join('');
+}
+
+
+// ===== Splash Screen Logic =====
+window.addEventListener('load', () => {
+    setTimeout(() => {
+        document.getElementById('splashScreen').style.opacity = '0';
+        setTimeout(() => {
+            document.getElementById('splashScreen').remove();
+            document.querySelector('.container').classList.remove('hidden');
+        }, 500); // Matches CSS transition time
+    }, 2500); // Total splash time = 2.5s (2s visible + 0.5s fade)
+});
+
+// ===== Initialization =====
+renderTasks();
+showScreen('homeScreen');
